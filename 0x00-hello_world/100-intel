@@ -1,1 +1,2 @@
-export CFILE=main.c; gcc -o 100-intel -masm=intel $CFILE && ./100-intel
+#!/bin/bash
+gcc -S -masm=intel $CFILE
