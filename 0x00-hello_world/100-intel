@@ -1,28 +1,3 @@
-#!/bin/bash
-
-# Check if the C file variable is set
-if [ -z "$CFILE" ]; then
-  echo "Error: The variable \$CFILE is not set. Please set it to the name of your C file."
-  exit 1
-fi
-
-# Check if the C file exists
-if [ ! -f "$CFILE" ]; then
-  echo "Error: The C file '$CFILE' does not exist."
-  exit 1
-fi
-
-# Extract the base name of the C file (without extension)
-BASENAME=$(basename -- "$CFILE")
-BASENAME_NOEXT="${BASENAME%.*}"
-
-# Generate assembly code using gcc
-gcc -S -o "${BASENAME_NOEXT}.s" "$CFILE"
-
-# Check if the compilation was successful
-if [ $? -eq 0 ]; then
-  echo "Assembly code generated and saved as ${BASENAME_NOEXT}.s"
-else
-  echo "Error: Failed to generate assembly code."
-  exit 1
-fi
+export CFILE=main.c
+gcc -o 100-intel -masm=intel $CFILE
+./100-intel
